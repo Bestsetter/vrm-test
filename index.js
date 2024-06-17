@@ -31,7 +31,20 @@ let datGUIControls = new (function () {
   this.neckrotationX = 0;
   this.neckrotationY = 0;
   this.neckrotationZ = 0;
+  this.Surprised = 0;
   this.aa = 0;
+  this.angry = 0;
+  this.blink = 0;
+  this.blinkLeft = 0;
+  this.blinkRight = 0;
+  this.ee = 0;
+  this.happy = 0;
+  this.ih = 0;
+  this.neutral = 0;
+  this.oh = 0;
+  this.ou = 0;
+  this.relaxed = 0;
+  this.sad = 0;
 })();
 
 // function initStats() {
@@ -57,8 +70,11 @@ function init() {
   });
   loader.load("test.vrm", function (gltf) {
     model = gltf.userData.vrm;
-    console.log("gltf:",gltf);
-    console.log("gltf.userData.vrm.humanoid._normalizedHumanBones.humanBones",gltf.userData.vrm.humanoid._normalizedHumanBones.humanBones);
+    console.log("gltf:", gltf);
+    console.log(
+      "gltf.userData.vrm.humanoid._normalizedHumanBones.humanBones",
+      gltf.userData.vrm.humanoid._normalizedHumanBones.humanBones
+    );
     // model.scale.set(2, 2, 5);
     // model.position.set(0, 0, 0);
     // model.children[1].material = new THREE.MeshPhongMaterial({ color: 0x00ff00 });
@@ -137,36 +153,93 @@ function init() {
     .onChange(function (val) {
       model.scene.rotation.z = val;
     });
-    gui.add(datGUIControls, "headrotationX", -Math.PI, Math.PI).onChange(function (val) {
-        model.humanoid.getNormalizedBoneNode("head").rotation.x = val;
+  gui
+    .add(datGUIControls, "headrotationX", -Math.PI, Math.PI)
+    .onChange(function (val) {
+      model.humanoid.getNormalizedBoneNode("head").rotation.x = val;
     });
-    gui.add(datGUIControls, "headrotationY", -Math.PI, Math.PI).onChange(function (val) {
-        model.humanoid.getNormalizedBoneNode("head").rotation.y = val;
+  gui
+    .add(datGUIControls, "headrotationY", -Math.PI, Math.PI)
+    .onChange(function (val) {
+      model.humanoid.getNormalizedBoneNode("head").rotation.y = val;
     });
-    gui.add(datGUIControls, "headrotationZ", -Math.PI, Math.PI).onChange(function (val) {
-        model.humanoid.getNormalizedBoneNode("head").rotation.z = val;
+  gui
+    .add(datGUIControls, "headrotationZ", -Math.PI, Math.PI)
+    .onChange(function (val) {
+      model.humanoid.getNormalizedBoneNode("head").rotation.z = val;
     });
-    gui.add(datGUIControls, "leftEyerotationX", -Math.PI, Math.PI).onChange(function (val) {
-        model.humanoid.getNormalizedBoneNode("leftEye").rotation.x = val;
+  gui
+    .add(datGUIControls, "leftEyerotationX", -Math.PI, Math.PI)
+    .onChange(function (val) {
+      model.humanoid.getNormalizedBoneNode("leftEye").rotation.x = val;
     });
-    gui.add(datGUIControls, "leftEyerotationY", -Math.PI, Math.PI).onChange(function (val) {
-        model.humanoid.getNormalizedBoneNode("leftEye").rotation.y = val;
+  gui
+    .add(datGUIControls, "leftEyerotationY", -Math.PI, Math.PI)
+    .onChange(function (val) {
+      model.humanoid.getNormalizedBoneNode("leftEye").rotation.y = val;
     });
-    gui.add(datGUIControls, "leftEyerotationZ", -Math.PI, Math.PI).onChange(function (val) {
-        model.humanoid.getNormalizedBoneNode("leftEye").rotation.z = val;
+  gui
+    .add(datGUIControls, "leftEyerotationZ", -Math.PI, Math.PI)
+    .onChange(function (val) {
+      model.humanoid.getNormalizedBoneNode("leftEye").rotation.z = val;
     });
-    gui.add(datGUIControls, "neckrotationX", -Math.PI, Math.PI).onChange(function (val) {
-        model.humanoid.getNormalizedBoneNode("neck").rotation.x = val;
+  gui
+    .add(datGUIControls, "neckrotationX", -Math.PI, Math.PI)
+    .onChange(function (val) {
+      model.humanoid.getNormalizedBoneNode("neck").rotation.x = val;
     });
-    gui.add(datGUIControls, "neckrotationY", -Math.PI, Math.PI).onChange(function (val) {
-        model.humanoid.getNormalizedBoneNode("neck").rotation.y = val;
+  gui
+    .add(datGUIControls, "neckrotationY", -Math.PI, Math.PI)
+    .onChange(function (val) {
+      model.humanoid.getNormalizedBoneNode("neck").rotation.y = val;
     });
-    gui.add(datGUIControls, "neckrotationZ", -Math.PI, Math.PI).onChange(function (val) {
-        model.humanoid.getNormalizedBoneNode("neck").rotation.z = val;
+  gui
+    .add(datGUIControls, "neckrotationZ", -Math.PI, Math.PI)
+    .onChange(function (val) {
+      model.humanoid.getNormalizedBoneNode("neck").rotation.z = val;
     });
-    gui.add(datGUIControls, "aa", 0, 1).onChange(function (val) {
-        model.expressionManager.setValue("aa", val);
-    });
+  gui.add(datGUIControls, "Surprised", 0, 1).onChange(function (val) {
+    model.expressionManager.setValue("Surprised", val);
+  });
+  gui.add(datGUIControls, "aa", 0, 1).onChange(function (val) {
+    model.expressionManager.setValue("aa", val);
+  });
+  gui.add(datGUIControls, "angry", 0, 1).onChange(function (val) {
+    model.expressionManager.setValue("angry", val);
+  });
+  gui.add(datGUIControls, "blink", 0, 1).onChange(function (val) {
+    model.expressionManager.setValue("blink", val);
+  });
+  gui.add(datGUIControls, "blinkLeft", 0, 1).onChange(function (val) {
+    model.expressionManager.setValue("blinkLeft", val);
+  });
+  gui.add(datGUIControls, "blinkRight", 0, 1).onChange(function (val) {
+    model.expressionManager.setValue("blinkRight", val);
+  });
+  gui.add(datGUIControls, "ee", 0, 1).onChange(function (val) {
+    model.expressionManager.setValue("ee", val);
+  });
+  gui.add(datGUIControls, "happy", 0, 1).onChange(function (val) {
+    model.expressionManager.setValue("happy", val);
+  });
+  gui.add(datGUIControls, "ih", 0, 1).onChange(function (val) {
+    model.expressionManager.setValue("ih", val);
+  });
+  gui.add(datGUIControls, "neutral", 0, 1).onChange(function (val) {
+    model.expressionManager.setValue("neutral", val);
+  });
+  gui.add(datGUIControls, "oh", 0, 1).onChange(function (val) {
+    model.expressionManager.setValue("oh", val);
+  });
+  gui.add(datGUIControls, "ou", 0, 1).onChange(function (val) {
+    model.expressionManager.setValue("ou", val);
+  });
+  gui.add(datGUIControls, "relaxed", 0, 1).onChange(function (val) {
+    model.expressionManager.setValue("relaxed", val);
+  });
+  gui.add(datGUIControls, "sad", 0, 1).onChange(function (val) {
+    model.expressionManager.setValue("sad", val);
+  });
 
   const clock = new THREE.Clock();
   clock.start();
@@ -175,7 +248,7 @@ function init() {
     cameraControl.update();
     requestAnimationFrame(render);
     if (model) {
-        model.update(clock.getDelta());
+      model.update(clock.getDelta());
     }
     renderer.render(scene, camera);
     // console.log(render)
